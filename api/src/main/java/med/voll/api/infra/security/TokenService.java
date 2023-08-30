@@ -38,15 +38,11 @@ public class TokenService {
     public String getSubject(String tokenJWT) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
-            JWTVerifier verifier = JWT.require(algoritmo)
-                    // specify an specific claim validations
+            return JWT.require(algoritmo)
                     .withIssuer(ISSUER)
-                    // reusable verifier instance
-                    .build();
-
-            DecodedJWT jwt = verifier.verify(tokenJWT);
-            return jwt.getSubject();
-
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
         } catch (JWTVerificationException exception) {
             throw new RuntimeException("Token JWT inválido ou expirado!" + tokenJWT, exception);
         }
