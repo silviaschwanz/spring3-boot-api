@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("medicos")
-public class MedicosController {
+public class MedicoController {
 
     @Autowired
     private MedicoRepository repository;
